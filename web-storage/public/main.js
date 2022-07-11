@@ -2,7 +2,7 @@
 
 // For storing user's theme selection in the browser
 function storeTheme(themeName) {
-  localStorage.setItem('theme', themeName)
+  localStorage.setItem('theme', themeName);
 }
 
 // For restoring theme, if selected by the user in the past
@@ -20,24 +20,24 @@ function clearTheme() {
 
 // For storing user's display name
 function storeName(displayName) {
-  window.localStorage.setItem('displayName', displayName)
-  window.sessionStorage.setItem('displayName', displayName)
+  window.localStorage.setItem('displayName', displayName);
+  window.sessionStorage.setItem('displayName', displayName);
 }
 
 // For restoring user's display name, if set in the past
 function restoreName() {
-  const storedNameLocal = window.localStorage.getItem('displayName')
-  const storedName = window.sessionStorage.getItem('displayName')
+  const storedNameLocal = window.localStorage.getItem('displayName');
+  const storedName = window.sessionStorage.getItem('displayName');
 
   if (storedName) {
-    setInputValue('display-name', storedName)
+    setInputValue('display-name', storedName);
   }
 }
 
 // For clearing user's display name from browser storage
 function clearName() {
-  window.localStorage.removeItem('displayName')
-  window.sessionStorage.removeItem('displayName')
+  window.localStorage.removeItem('displayName');
+  window.sessionStorage.removeItem('displayName');
 }
 
 /* ========================================================================= */
@@ -49,12 +49,12 @@ function clearName() {
 // For changing one theme button's styling to indicate which theme is selected
 
 function toggleButtonSelection(themeName, selected) {
-  const btn = document.getElementById(`theme-button-${themeName}`)
+  const btn = document.getElementById(`theme-button-${themeName}`);
   if (btn) {
     if (selected) {
-      btn.classList.add('selected')
+      btn.classList.add('selected');
     } else {
-      btn.classList.remove('selected')
+      btn.classList.remove('selected');
     }
   }
 }
@@ -63,38 +63,38 @@ function toggleButtonSelection(themeName, selected) {
 
 function setTheme(themeName) {
   // Clear previous selection so buttons don't get stuck in selected state
-  resetTheme()
+  resetTheme();
 
   // Remember user's selection by storing it in their browser
-  storeTheme(themeName)
+  storeTheme(themeName);
 
   // Apply the theme to the page document
-  document.documentElement.className = `theme-${themeName}`
+  document.documentElement.className = `theme-${themeName}`;
 
   // Show which button is selected
-  toggleButtonSelection(themeName, true)
+  toggleButtonSelection(themeName, true);
 }
 
 // Use default theme
 
 function resetTheme() {
   // Remove selection styling from all buttons
-  toggleButtonSelection('dragon', false)
-  toggleButtonSelection('griffin', false)
-  toggleButtonSelection('wizard', false)
+  toggleButtonSelection('dragon', false);
+  toggleButtonSelection('griffin', false);
+  toggleButtonSelection('wizard', false);
 
   // Set default theme so header and footer are contrast colors
-  document.documentElement.className = `theme-none`
+  document.documentElement.className = `theme-none`;
 }
 
 // For adding event listeners on the theme buttons
 
 function addThemeEventListeners() {
-  const themeNames = ['dragon', 'griffin', 'wizard']
+  const themeNames = ['dragon', 'griffin', 'wizard'];
   themeNames.forEach((themeName) => {
-    const button = document.getElementById(`theme-button-${themeName}`)
-    button.addEventListener('click', () => setTheme(themeName))
-  })
+    const button = document.getElementById(`theme-button-${themeName}`);
+    button.addEventListener('click', () => setTheme(themeName));
+  });
 }
 
 // ===== NAME CONTROL
@@ -102,27 +102,27 @@ function addThemeEventListeners() {
 // For assigning change event to input field
 
 function assignChangeEvent(inputId, handleChange) {
-  const input = document.getElementById(inputId)
+  const input = document.getElementById(inputId);
   if (input) {
     input.addEventListener('input', (event) => {
-      handleChange(event.target.value)
-    })
+      handleChange(event.target.value);
+    });
   }
 }
 
 // For setting value on input field
 
 function setInputValue(inputId, value) {
-  const input = document.getElementById(inputId)
+  const input = document.getElementById(inputId);
   if (input) {
-    input.value = value
+    input.value = value;
   }
 }
 
 // For resetting the display name to empty string
 
 function resetName() {
-  setInputValue('display-name', '')
+  setInputValue('display-name', '');
 }
 
 // ===== CLEAR ALL
@@ -131,19 +131,19 @@ function resetName() {
 
 function clearAll() {
   // Remove from browser storage
-  clearTheme()
-  clearName()
+  clearTheme();
+  clearName();
 
   // Reset the page
-  resetTheme()
-  resetName()
+  resetTheme();
+  resetName();
 }
 
 // For adding click event listener on the Clear All button
 
 function addClearAllEventListener() {
-  const button = document.getElementById('clear-all')
-  button.addEventListener('click', clearAll)
+  const button = document.getElementById('clear-all');
+  button.addEventListener('click', clearAll);
 }
 
 // ===== INITIALIZE PAGE
@@ -152,20 +152,20 @@ function addClearAllEventListener() {
 
 function initializePage() {
   // Set default theme so header & footer have dark backgrounds
-  resetTheme()
+  resetTheme();
 
   // Restore user's previous theme selection, if it exists
-  restoreTheme()
+  restoreTheme();
 
   // Assign event to name input
-  assignChangeEvent('display-name', storeName)
+  assignChangeEvent('display-name', storeName);
 
   // Restore user's previous name selection, if it exists
-  restoreName()
+  restoreName();
 
   // Add event listeners
-  addThemeEventListeners()
-  addClearAllEventListener()
+  addThemeEventListeners();
+  addClearAllEventListener();
 }
 
-window.addEventListener('DOMContentLoaded', initializePage)
+window.addEventListener('DOMContentLoaded', initializePage);
